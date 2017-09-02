@@ -4,6 +4,11 @@ from mylogger import LoggerNew
 import argparse
 import logging
 import sys
+import time
+import OPi.GPIO as GPIO
+from flask import Flask, jsonify, abort, make_response, request, url_for
+from flask_httpauth import HTTPBasicAuth
+import json
 
 def main(log):
     log.info("Starting")
@@ -12,6 +17,17 @@ def main(log):
 
     disp.draw_text("Roman Grekov")
     disp.draw_text_x_y(0, 25, "Molodets")
+
+    log.info("Setup GPIO")
+    led_gpio = 7
+    #GPIO.setmode(GPIO.SUNXI)
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setup(led_gpio, GPIO.OUT)
+    while True:
+        GPIO.output(led_gpio, GPIO.HIGH)
+        time.sleep(1)
+        GPIO.output(led_gpio, GPIO.LOW)
+        time.sleep(1)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Main script')
