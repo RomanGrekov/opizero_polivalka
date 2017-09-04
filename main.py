@@ -24,8 +24,23 @@ def main(log):
         while True:
             mux.set_pin(0)
             time.sleep(1)
-            mux.reset_pin(0)
+            mux.set_pin(2)
             time.sleep(1)
+
+            mux.set_pin(0)
+            time.sleep(0.2)
+            mux.reset_pin()
+            time.sleep(0.2)
+            mux.set_pin(0)
+            time.sleep(0.2)
+            mux.reset_pin()
+            time.sleep(0.2)
+            mux.set_pin(0)
+            time.sleep(0.2)
+            mux.reset_pin()
+            time.sleep(0.2)
+
+            
 
     return 0
 
