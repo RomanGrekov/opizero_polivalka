@@ -28,5 +28,11 @@ iface wlan0 inet manual<br />
 wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf <br />
 iface mywifi inet dhcp<br />
 
+or use nmcli
+iwconfig wlan0
+nmcli dev wifi list 
+nmcli device wifi connect MYHOME password 'p@55w0rd'
+
+
 #############################################<br />
 
