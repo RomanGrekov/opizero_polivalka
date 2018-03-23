@@ -32,7 +32,9 @@ or use nmcli<br />
 iwconfig wlan0<br />
 nmcli dev wifi list<br />
 nmcli device wifi connect MYHOME password 'p@55w0rd'<br />
-
+nmcli radio wifi<br />
+nmcli radio wifi <on|off><br />
+nmcli device wifi rescan<br />
 
 #############################################<br />
 
