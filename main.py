@@ -4,7 +4,7 @@ from mylogger import LoggerNew
 import argparse
 import logging
 import sys
-import time
+from time import gmtime, strftime, sleep
 from flask import Flask, jsonify, abort, make_response, request, url_for
 #from flask_httpauth import HTTPBasicAuth
 import json
@@ -16,31 +16,19 @@ def main(log):
     log.info("Init display")
     disp = MyDisp(128, 64, 0)
 
-    disp.draw_text("Roman Grekov")
-    disp.draw_text_x_y(0, 25, "Molodets")
+    disp.draw_text("Test")
 
     log.info("Setup GPIO")
-    with Multiplexor(log, 18, 12, 26, 24, 22, 16) as mux:
+    with Multiplexor(log, 11, 13, 16, 12, 15, 19) as mux:
         while True:
+	    disp.clean_line(25)
+            disp.draw_text_x_y(0, 25, strftime("%H:%M:%S", gmtime()))
             mux.set_pin(0)
-            time.sleep(1)
-            mux.set_pin(2)
-            time.sleep(1)
-
-            mux.set_pin(0)
-            time.sleep(0.2)
+            sleep(1)
             mux.reset_pin()
-            time.sleep(0.2)
-            mux.set_pin(0)
-            time.sleep(0.2)
+            mux.set_pin(1)
+            sleep(1)
             mux.reset_pin()
-            time.sleep(0.2)
-            mux.set_pin(0)
-            time.sleep(0.2)
-            mux.reset_pin()
-            time.sleep(0.2)
-
-            
 
     return 0
 

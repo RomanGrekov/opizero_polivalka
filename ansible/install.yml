@@ -1,0 +1,151 @@
+---
+
+- hosts: target
+  remote_user: romang
+
+  tasks:
+
+  - name: apt-get update
+    apt: update_cache=yes
+    ignore_errors: True
+    become: yes
+
+  - name: Update all packages to the latest version
+    apt:
+      upgrade: dist
+    become: yes
+#
+#  - name: Install pip
+#    apt:
+#      name: python-pip
+#    become: yes
+#
+## Needed by pil
+#  - name: Install libjpeg-dev
+#    apt:
+#      name: libjpeg-dev
+#    become: yes
+#
+#  - name: Install python-dev
+#    apt:
+#      name: python-dev
+#    become: yes
+#
+#  - name: Install gcc
+#    apt:
+#      name: gcc 
+#    become: yes
+#
+# - name: Install libfreetype6-dev
+#   apt:
+#     name: libfreetype6-dev
+#   become: yes
+##################################
+#  - name: Install GPIO lib
+#    pip:
+#      name: OPi.GPIO
+#      extra_args: --upgrade
+#    become: yes
+#
+#  - name: Install smbus2 lib
+#    pip:
+#      name: smbus2
+#      extra_args: --upgrade
+#    become: yes
+#
+# - name: Install PIL lib
+#   pip:
+#     name: Pillow
+#     extra_args: --upgrade
+#   become: yes
+#
+#  - name: Install flask
+#    pip:
+#      name: flask
+#      extra_args: --upgrade
+#    become: yes
+
+#  - name: Get Kernel version
+#    shell: uname -r
+#    register: kernel_shell_output
+#
+#  - debug: msg="{{kernel_shell_output.stdout}}"
+#
+##Needed for PWM
+#  - name: Install linux headers
+#    apt:
+#      name: linux-headers-sun8i
+#    become: yes
+#
+#  - name: Make symlink for headers
+#    shell: ln -s /usr/src/linux-headers-{{kernel_shell_output.stdout}} /lib/modules/{{kernel_shell_output.stdout}}/build
+#    become: yes
+#
+#  - name: Copy script.fex file
+#    copy:
+#      src: script.fex
+#      dest: /boot/script.fex
+#    become: yes
+#
+#  - name: Generate script.bin
+#    shell: fex2bin /boot/script.fex /boot/script.bin
+#    become: yes
+#
+#  - name: Clone the repo
+#    shell: cd {{ ansible_env.HOME }} && git clone https://github.com/iboguslavsky/pwm-sunxi-opi0.git
+#
+#  - name: Compile pwm driver
+#    shell: cd {{ ansible_env.HOME }}/pwm-sunxi-opi0/ && make
+#    become: yes
+#
+##  - name: Insert pwm driver
+##    shell: cd {{ ansible_env.HOME }}/pwm-sunxi-opi0/ && insmod ./pwm-sunxi-opi0.ko
+##    become: yes
+#
+#  - name: Copy driver to modules path
+#    shell: cd {{ ansible_env.HOME }}/pwm-sunxi-opi0/ && cp ./pwm-sunxi-opi0.ko /lib/modules/{{kernel_shell_output.stdout}}/kernel/drivers/
+#    become: yes
+#
+#  - name: Update modes
+#    shell: depmod -a
+#    become: yes
+#
+#  - name: Load module
+#    shell: modprobe pwm_sunxi_opi0
+#    become: yes
+#
+#  - name: Add pwm driver to /etc/modprobe
+#    lineinfile:
+#      create: yes
+#      destfile: /etc/modprobe.d/pwm_sunxi_opi0.conf
+#      line: 'pwm_sunxi_opi0'
+#    become: yes
+#
+#  - name: Add original pwm driver to blacklist
+#    lineinfile:
+#      destfile: /etc/modprobe.d/blacklist-orangepizero.conf
+#      line: 'blacklist pwm_sunxi'
+#    become: yes
+#
+#  - name: Update initramfs
+#    shell: sudo update-initramfs -u
+#    become: yes
+#########################################
+#
+#  - name: Reboot...
+#    shell: reboot
+#    async: 1
+#    poll: 0
+#    ignore_errors: true
+#    become: yes
+#
+#  - name: Wait for opi
+#    local_action:
+#      module: wait_for
+#        host={{ inventory_hostname }}
+#        port=22
+#        delay=10
+#        timeout=120
+#        #state=started
+
+

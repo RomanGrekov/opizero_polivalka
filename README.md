@@ -1,5 +1,9 @@
 # opizero_polivalka
 
+# Ansible
+# Check target host
+ansible target -a "uptime" -c paramiko<br />
+
 # Userfull links
 
 http://opi-gpio.readthedocs.io/en/latest/api-documentation.html<br />
